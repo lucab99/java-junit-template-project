@@ -28,6 +28,25 @@ public class CaesarVerschluesselung1 {
 	}
 
 	public static void verschluesseln(String text) {
+		String Textverschluesselt = "";
+		char zeichen = ' ';
+		System.out.println("Bitte geben Sie den Schlüssel als Zahl ein (Um wieviele Stellen soll das Alphabet verschoben werden? z.B. um 3 Stellen --> A wird zu D)");
+		int verschiebung = eingabeSchluessel();
+		
+		
+		for (int i = 0; i < text.length(); i++) {
+			int a = text.charAt(i);
+			if (a >= 65 && a <= 90) { //Wenn das Zeichen kein Buchstabe, sondern z.B. ein Ausrufezeichen oder Leerzeichen ist, soll es nicht verschlüsselt werden, sondern weiterhin im Klartext erscheinen
+			int b = a + verschiebung;
+			if (b > 90) {			//der Unicode als Dezimalzahl für den letzten Großbuchstaben im Alphabet (Z) ist 90; wenn die Zahl darüber liegt, muss man also wieder zum Anfang des Alphabets zurückspringen (Z um 1 nach rechts verschoben ist A) https://unicode-table.com/de/#control-character
+				b = b - 26;
+			}
+			zeichen = (char) b; } else {
+				zeichen = text.charAt(i);
+			}
+			Textverschluesselt = Textverschluesselt + zeichen;
+		}
+		System.out.println("Entschlüsselter Text: " + Textverschluesselt);
 		
 	}
 
